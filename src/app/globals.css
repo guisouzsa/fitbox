@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+:root {
+  --color-cream: #f7f3ea;
+  --color-parchment: #efe6d4;
+  --color-charcoal: #1c1a16;
+  --color-charcoal-soft: #2a2721;
+  --color-olive: #6b7048;
+  --color-olive-deep: #4a4e30;
+  --color-stone: #8a8172;
+  --color-stone-light: #b8ae9c;
+  --color-line: rgba(28, 26, 22, 0.12);
+  --color-line-dark: rgba(247, 243, 234, 0.14);
+}
+
+@theme inline {
+  --color-cream: var(--color-cream);
+  --color-parchment: var(--color-parchment);
+  --color-charcoal: var(--color-charcoal);
+  --color-charcoal-soft: var(--color-charcoal-soft);
+  --color-olive: var(--color-olive);
+  --color-olive-deep: var(--color-olive-deep);
+  --color-stone: var(--color-stone);
+  --color-stone-light: var(--color-stone-light);
+  --color-line: var(--color-line);
+  --color-line-dark: var(--color-line-dark);
+
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-manrope);
+
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 1s ease forwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-olive);
+  color: var(--color-cream);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-mask {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-mask-visible {
+  clip-path: inset(0 0 0% 0);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.hero-frame {
+  opacity: 0;
+  transform: scale(1);
+  animation: hero-kenburns 24s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes hero-kenburns {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  8% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  33%,
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-mask {
+    clip-path: none;
+  }
+}
